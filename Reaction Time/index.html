@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Montserrat', sans-serif;
+            background-color: rgba(255, 94, 100, 0.5);
+        }
+        
+        .bold{
+            font-weight: bold;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        #box{
+            width: 140px;
+            height: 140px;
+            background-color: blue;
+            display: none;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tesing your reaction</h1>
+    <h2 class="bold">Time: <span id="time"></span></h2>
+
+    <div id="box">
+
+    </div>
+
+    <script type="text/javascript">
+        var createtime
+        var clicktime
+        var timeInterval
+        //random color generator
+        function randomColor(){
+            var max = 200;
+            var min = 50;
+            var green = Math.floor(Math.random()*(max-min+1))+min
+            var color="rgba(255,"+green+",243,1.0)"
+            
+            return color
+        }
+        //make box function
+        function makeBox(){
+            var ratio = Math.random();
+            var time = ratio*1000
+
+            setTimeout(function(){
+                document.getElementById('box').style.backgroundColor=randomColor()
+                document.getElementById('box').style.display='block'
+                createtime=Date.now()
+            },time)
+        }
+
+        //clicking move
+        document.getElementById('box').onclick=function(){
+            this.style.display='none'
+            clicktime=Date.now()
+            timeInterval=(clicktime-createtime)/1000
+            document.getElementById('time').innerHTML=timeInterval
+
+            makeBox()
+        }
+        makeBox()
+
+    </script>
+</body>
+
+</html>
